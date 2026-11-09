@@ -15,9 +15,9 @@ Imagine uma mesa proprietária ou um fundo quantitativo exposto a um conjunto de
 
 $$\min \sum_{j \in S} c_j x_j \quad \text{sujeito a} \quad \sum_{j: e \in S_j} x_j \ge 1, \quad \forall e \in U, \quad x_j \in \{0,1\}$$
 
-
-
 Onde $U$ é o universo de cenários de risco e $S_j$ são os riscos cobertos pelo derivativo $j$.
+
+> **Nota explicativa sobre a restrição ($\sum_{j: e \in S_j} x_j \ge 1$):** Para cada risco $e$ pertencente ao universo $U$, deve existir pelo menos um contrato $S_j$ ativo ($x_j = 1$) que o contemple. Em outras palavras, ao iterar sobre cada risco $e$, a soma das variáveis de decisão $x_j$ de todos os contratos que cobrem esse risco específico deve ser maior ou igual a $1$, assegurando que toda a carteira de riscos esteja devidamente protegida.
 * **Modelagem Dual (Maximização — "Empacotamento de Preços de Sombra"):**
 
 $$\max \sum_{e \in U} y_e \quad \text{sujeito a} \quad \sum_{e \in S_j} y_e \le c_j, \quad \forall j \in S, \quad y_e \ge 0$$
