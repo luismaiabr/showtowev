@@ -27,6 +27,20 @@ $$\max \sum_{e \in U} y_e \quad \text{sujeito a} \quad \sum_{e \in S_j} y_e \le 
 Aqui, $y_e$ representa o "preço sombra" (*shadow price*) ou o quanto estamos dispostos a pagar individualmente para neutralizar o risco $e$.
 * **Fator de Aproximação:** Garantia teórica de $O(f)$, onde $f$ é o número máximo de instrumentos que cobrem um mesmo risco.
 
+> **Adendo: o que significa Primal e Dual na prática?**
+>
+> O Primal e o Dual são **duas faces da mesma moeda**: duas maneiras diferentes de enxergar e resolver exatamente o mesmo problema econômico ou computacional.
+>
+> | Perspectiva | Primal (O Problema Original) | Dual (O Problema Espelho) |
+> | --- | --- | --- |
+> | **Ponto de vista** | Físico / Decisório (alocação de recursos) | Econômico / Valoração (preços e orçamentos) |
+> | **Pergunta central** | "Quais derivativos comprar para cobrir todos os riscos gastando o mínimo possível?" | "Quanto vale a neutralização de cada risco para maximizar o orçamento sem ultrapassar o custo dos derivativos?" |
+> | **Ação** | **Minimizar** custos ($\min \sum c_j x_j$) | **Maximizar** valor/preços-sombra ($\max \sum y_e$) |
+> | **Variáveis** | $x_j \in \{0,1\}$ (comprar ou não o derivativo $j$) | $y_e \ge 0$ (orçamento ou preço-sombra do risco $e$) |
+> | **Restrições** | Cada risco precisa de cobertura: $\sum_{j: e \in S_j} x_j \ge 1$ | Ninguém paga mais que o preço de mercado: $\sum_{e \in S_j} y_e \le c_j$ |
+>
+> **Por que isso importa para o algoritmo:** pela dualidade fraca, qualquer solução dual viável é uma **cota inferior** para o ótimo ($\sum y_e \le OPT$). Assim, o algoritmo Primal-Dual constrói simultaneamente uma solução primal (a carteira de derivativos) e uma dual (os preços-sombra), e usa a dual para certificar a qualidade da primal.
+
 **Visualização em Angular:**
 
 * **Painel Esquerdo (Grafo Bipartido):** Nós à esquerda são os Cenários de Risco ($e$); nós à direita são os Contratos/Opções ($S_j$) com uma barra de capacidade equivalente ao seu custo $c_j$.
